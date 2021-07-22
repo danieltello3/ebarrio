@@ -1,165 +1,131 @@
-import React, { useState } from "react";
-import LoginCatch from "../../hooks/LoginCatch";
-import {
-   Container,
-   CssBaseline,
-   Typography,
-   TextField,
-   Grid,
-   Button,
-   Box,
-   ThemeProvider,
-   InputAdornment,
-   IconButton,
-} from "@material-ui/core";
-import { makeStyles, createTheme } from "@material-ui/core/styles";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-const schema = yup.object().shape({
-   email: yup
-      .string()
-      .required("el email es un campo obligatorio")
-      .email("necesita ser un correo valido"),
-   password: yup
-      .string()
-      .required("la contraseña es obligatorio")
-      .min(6, "la contraseña debe tener al menos 6 caracteres"),
-});
-
-const theme = createTheme({
-   overrides: {
-      MuiOutlinedInput: {
-         root: {
-            borderRadius: "25px",
-         },
-      },
-   },
-});
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 const useStyles = makeStyles((theme) => ({
-   contenedor: {
-      marginTop: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-   },
-   input: {
-      marginTop: "20px",
-   },
-   form: {
-      width: "100%",
-      marginTop: theme.spacing(3),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-   },
-   button: {
-      marginTop: "20px",
-      fontSize: "14px",
-   },
-   buttonCTA: {
-      marginTop: "15px",
-      padding: "15px 40px",
-   },
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
-const Login = () => {
-   const classes = useStyles();
-   const [showPassword, setShowPassword] = useState(false);
-   const { register, handleSubmit, errors } = useForm({
-      mode: "onTouched",
-      resolver: yupResolver(schema),
-   });
+export default function SignInSide() {
+  const classes = useStyles();
 
-   const { Form, handleChange, IniciarSesion } = LoginCatch();
-
-   const handleClickShowPassword = () => {
-      setShowPassword(!showPassword);
-   };
-
-   return (
-      <Container component="main" maxWidth="sm">
-         <CssBaseline>
-            <ThemeProvider theme={theme}>
-               <Box
-                  boxShadow={2}
-                  p={{ xs: 5 }}
-                  borderRadius={16}
-                  color="text.primary"
-                  bgcolor="background.paper"
-                  className={classes.contenedor}>
-                  <Typography component="h2" variant="h4" color="primary">
-                     Inicia Sesión
-                  </Typography>
-                  <form
-                     className={classes.form}
-                     onSubmit={handleSubmit(IniciarSesion)}
-                     noValidate>
-                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                           <TextField
-                              className={classes.input}
-                              id="email"
-                              name="email"
-                              label="Correo Electronico"
-                              variant="outlined"
-                              autoComplete="email"
-                              inputRef={register}
-                              error={!!errors.email}
-                              helperText={errors.email?.message}
-                              required
-                              fullWidth
-                           />
-                        </Grid>
-                        <Grid item xs={12}>
-                           <TextField
-                              className={classes.input}
-                              id="password"
-                              name="password"
-                              label="Contraseña"
-                              variant="outlined"
-                              autoComplete="current-password"
-                              type={showPassword ? "text" : "password"}
-                              inputRef={register}
-                              error={!!errors.password}
-                              helperText={errors.password?.message}
-                              required
-                              fullWidth
-                              InputProps={{
-                                 endAdornment: (
-                                    <InputAdornment position="start">
-                                       <IconButton
-                                          aria-label="toggle password visibility"
-                                          onClick={handleClickShowPassword}
-                                          edge="end">
-                                          {showPassword ? (
-                                             <Visibility />
-                                          ) : (
-                                             <VisibilityOff />
-                                          )}
-                                       </IconButton>
-                                    </InputAdornment>
-                                 ),
-                              }}
-                           />
-                        </Grid>
-                     </Grid>
-                     <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={classes.buttonCTA}>
-                        Iniciar Sesión
-                     </Button>
-                  </form>
-               </Box>
-            </ThemeProvider>
-         </CssBaseline>
-      </Container>
-   );
-};
-
-export default Login;
+  return (
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </form>
+        </div>
+      </Grid>
+    </Grid>
+  );
+}
