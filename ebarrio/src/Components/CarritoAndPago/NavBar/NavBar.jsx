@@ -17,6 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
+import { ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
    menuButton: {
@@ -64,8 +65,12 @@ const useStyles = makeStyles((theme) => ({
          width: "20ch",
       },
    },
-}));
 
+
+}));
+const themeInstance = {
+   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+};
 const NavBar = () => {
    const classes = useStyles();
    const history = useHistory();
@@ -133,7 +138,7 @@ const NavBar = () => {
 
    return (
       <div>
-         <AppBar position="static">
+         <AppBar position="static" theme={themeInstance}>
             <Toolbar>
                <Typography variant="h6" onClick={() => history.push("/")}>
                   LOGO
@@ -188,7 +193,8 @@ const NavBar = () => {
                      </Box>
 
                      <Box p={1} order={2}>
-                        <Button color="inherit" onClick={handleOpenModalLogin}>
+                        <Button color="inherit"
+                         onClick={() => history.push("/Login")}>
                            Ingresar
                         </Button>
                         <Modal
@@ -201,7 +207,7 @@ const NavBar = () => {
                      <Box p={1} order={3}>
                         <Button
                            color="inherit"
-                           onClick={handleOpenModalRegister}>
+                           onClick={() => history.push("/Register")}>
                            Registrarme
                         </Button>
                         <Modal

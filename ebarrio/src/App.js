@@ -7,6 +7,9 @@ import CartShop from "./Components/CarritoAndPago/CartShop/CartShop";
 import Footer from "./Components/CarritoAndPago/Footer/Footer";
 import NavBar from "./Components/CarritoAndPago/NavBar/NavBar";
 import OnlineShopping from "./Components/Home/OnlineShopping";
+import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
+
 //import PerfilUsuario from "./components/PerfilUsuario/PerfilUsuario";
 
 const App = () => {
@@ -15,6 +18,12 @@ const App = () => {
          <Router>
             <NavBar />
             <Switch>
+               <Route exac path="/Login" >
+                  <Login/>
+               </Route>
+               <Route exac path="/Register" >
+                  <Register/>
+               </Route>
                <Route exact path="/">
                   <OnlineShopping />
                   <ProductoLista />
