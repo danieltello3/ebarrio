@@ -17,7 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
-import { ThemeProvider } from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles((theme) => ({
    menuButton: {
@@ -31,16 +31,15 @@ const useStyles = makeStyles((theme) => ({
    search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: fade(theme.palette.common.white, 0.20),
       "&:hover": {
          backgroundColor: fade(theme.palette.common.white, 0.25),
       },
-      //marginRight: theme.spacing(2),
       marginLeft: 0,
       width: "100%",
       [theme.breakpoints.up("md")]: {
          //marginLeft: theme.spacing(3),
-         width: 250,
+         width: 500,
       },
    },
    searchIcon: {
@@ -65,12 +64,18 @@ const useStyles = makeStyles((theme) => ({
          width: "20ch",
       },
    },
+   root: {
+                              //145 o 325
+      //background: 'linear-gradient(325deg, #61F908 15%, #FFFF00 40%, #FFAA00 55%, #FF007A 85% )',
+      //backgroundImage:'url(https://upload.wikimedia.org/wikipedia/commons/6/62/Carteles_chicha.jpg)',
+      backgroundSize: '100%',
+      borderColor:'#96acb0' ,
+      
+    },
+    
 
 
 }));
-const themeInstance = {
-   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-};
 const NavBar = () => {
    const classes = useStyles();
    const history = useHistory();
@@ -138,10 +143,10 @@ const NavBar = () => {
 
    return (
       <div>
-         <AppBar position="static" theme={themeInstance}>
-            <Toolbar>
+         <AppBar position="static" className={classes.root}>
+            <Toolbar >
                <Typography variant="h6" onClick={() => history.push("/")}>
-                  LOGO
+                  Ebarrio
                </Typography>
                <div style={{ width: "100%" }}>
                   <Box display="flex">
@@ -151,8 +156,9 @@ const NavBar = () => {
                               <Button
                                  aria-controls="simple-menu"
                                  aria-haspopup="true"
-                                 onClick={handleClick}>
-                                 Menu
+                                 onClick={handleClick}
+                                 color="initial">
+                                       Menu
                               </Button>
 
                               <Menu
@@ -204,19 +210,22 @@ const NavBar = () => {
                            <Login />
                         </Modal>
                      </Box>
+
                      <Box p={1} order={3}>
                         <Button
-                           color="inherit"
+                           color="secondary"
                            onClick={() => history.push("/Register")}>
                            Registrarme
                         </Button>
                         <Modal
-                           className={classes.modal}
-                           open={openRegister}
-                           onClose={handleCloseModalRegister}>
+                           //className={classes.modal}
+                           //open={openRegister}
+                           //onClose={handleCloseModalRegister}
+                           >
                            <Register />
                         </Modal>
                      </Box>
+
                      <Box p={1} order={4}>
                         <IconButton
                            aria-label="show 4 new shops"
@@ -227,6 +236,7 @@ const NavBar = () => {
                            </Badge>
                         </IconButton>
                      </Box>
+
                      <Box p={1} order={5}>
                         <IconButton
                            aria-label="account of current user"
@@ -256,9 +266,12 @@ const NavBar = () => {
                      </Box>
                   </Box>
                </div>
+               
             </Toolbar>
+            
          </AppBar>
       </div>
+      
    );
 };
 

@@ -16,28 +16,19 @@ import { shadows } from '@material-ui/system';
 const usarEstilos = makeStyles((theme) => ({
 
   root: {
-    maxWidth:360,
-    background: 'linear-gradient(48deg, #edeff7 20%, #7986CB 70%)',
+    //background: 'linear-gradient(48deg, #edeff7 20%, #7986CB 70%)',
     borderColor:'#96acb0' ,
-
+    borderRadius:10,
+    backgroundColor: '#045de9',
+    backgroundImage: 'linear-gradient(315deg, #045de9 0%, #09c6f9 74%)',
   },
   media: {
     height: 160,
+    margin:4,
+    borderRadius:10,
   },
-  container: {
-    
-    gridTemplateColumns: 'repeat(12, 1fr)',   
-    maxWidth: 310,
-    display: 'flex', 
-  },
-  marginAutoContainer: {
-    width: 330,
-    height: 140,
-    backgroundColor:"transparent",
-  },
-  marginAutoItem: {
-    margin: 'auto'
-  },
+
+ 
 
 }));
 
@@ -68,7 +59,11 @@ function Producto({titulo,descripcion,costo, redirigir,url,id}) {
         textOverflow="ellipsis"
         overflow="hidden"
           >
-             <p>{descripcion}</p>
+            <Typography>
+            {descripcion}
+            </Typography>
+             
+
           </Box>
          
          </Typography>

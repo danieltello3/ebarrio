@@ -9,14 +9,16 @@ import NavBar from "./Components/CarritoAndPago/NavBar/NavBar";
 import OnlineShopping from "./Components/Home/OnlineShopping";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-
+import "./App.css"
 //import PerfilUsuario from "./components/PerfilUsuario/PerfilUsuario";
 
 const App = () => {
    return (
       <div>
+         
          <Router>
             <NavBar />
+            
             <Switch>
                <Route exac path="/Login" >
                   <Login/>
