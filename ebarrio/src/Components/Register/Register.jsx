@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-   const [registerForm, setRegisterForm] = React.useState({});
+   const [registerForm, setRegisterForm] = React.useState({ tipoId: 3 });
    const history = useHistory();
 
    const handleRegistro = async () => {
@@ -181,17 +181,10 @@ export default function SignUp() {
                                  value="vendedor"
                                  color="primary"
                                  onChange={(e) => {
-                                    console.log(e.target.checked);
                                     if (e.target.checked === true) {
-                                       setRegisterForm({
-                                          ...registerForm,
-                                          tipoId: 2,
-                                       });
+                                       registerForm.tipoId = 2;
                                     } else {
-                                       setRegisterForm({
-                                          ...registerForm,
-                                          tipoId: 3,
-                                       });
+                                       registerForm.tipoId = 3;
                                     }
                                  }}
                               />
