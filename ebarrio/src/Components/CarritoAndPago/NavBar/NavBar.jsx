@@ -75,6 +75,7 @@ const NavBar = () => {
 
    const logOut = () => {
       setCurrentUser(false);
+      localStorage.removeItem("token");
       history.push("/");
    };
 
