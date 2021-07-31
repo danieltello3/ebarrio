@@ -9,22 +9,21 @@ import NavBar from "./Components/CarritoAndPago/NavBar/NavBar";
 import OnlineShopping from "./Components/Home/OnlineShopping";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-import "./App.css"
-//import PerfilUsuario from "./components/PerfilUsuario/PerfilUsuario";
+import "./App.css";
+import PerfilUsuario from "./Components/PerfilUsuario/PerfilUsuario";
 
 const App = () => {
    return (
       <div>
-         
          <Router>
             <NavBar />
-            
+
             <Switch>
-               <Route exac path="/Login" >
-                  <Login/>
+               <Route exac path="/Login">
+                  <Login />
                </Route>
-               <Route exac path="/Register" >
-                  <Register/>
+               <Route exac path="/Register">
+                  <Register />
                </Route>
                <Route exact path="/">
                   <OnlineShopping />
@@ -39,9 +38,9 @@ const App = () => {
                <Route exact path="/producto">
                   <ProductoLista />
                </Route>
-               {/* <Route exact path="/PerfilUsuario">
+               <Route exact path="/perfil">
                   <PerfilUsuario />
-               </Route> */}
+               </Route>
                <Route exact path="/servicio">
                   <ServicioLista />
                </Route>
