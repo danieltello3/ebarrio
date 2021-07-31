@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -20,6 +20,8 @@ import ItemThumbnail from "./ItemThumbnail/ItemThumbnail";
 import AvatarPerfil from "./Avatar";
 import AddProduct from "./AddProduct";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../../Auth";
 // import firebase, { db } from "./../../firebase";
 
 function TabPanel(props) {
@@ -91,16 +93,35 @@ const useStyles = makeStyles((theme) => ({
 const PerfilUsuario = () => {
    const classes = useStyles();
    const [value, setValue] = React.useState(0);
+   const { currentUser, setCurrentUser } = useContext(AuthContext);
    const history = useHistory();
    const theme = useTheme();
    const currentBP = useMediaQuery(theme.breakpoints.down("xs"));
    //    let user = firebase.auth().currentUser;
+   const [user, setUser] = React.useState("");
    const [datosUsuario, setDatosUsuario] = React.useState("");
 
    const handleChange = (event, newValue) => {
       setValue(newValue);
    };
-   let user = "vendedor";
+
+   useEffect(() => {
+      async function fetchData() {
+         await axios
+            .get("https://ebarrio.herokuapp.com/perfil", {
+               headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+               },
+            })
+            .then((respuesta) => {
+               const data = respuesta.data.content;
+               setUser(data);
+            });
+      }
+      fetchData();
+   }, [currentUser]);
+
+   console.log(user);
 
    //    useEffect(() => {
    //       async function fetchData() {
@@ -110,8 +131,6 @@ const PerfilUsuario = () => {
    //       }
    //       fetchData();
    //    }, [user]);
-
-   const body = <AddProduct />;
 
    return (
       <Container maxWidth="lg" className={classes.container}>
@@ -124,7 +143,7 @@ const PerfilUsuario = () => {
                className={classes.header}>
                <AvatarPerfil />
                <Typography variant="h2" color="primary">
-                  MI CUENTA
+                  {`Bienvenido ${user.usuarioNombre}`}
                </Typography>
             </Grid>
             <Divider />
@@ -141,7 +160,7 @@ const PerfilUsuario = () => {
                   <Tab label="datos personales" {...tabProps(0)} />
                   <Tab label="direcciones" {...tabProps(1)} />
                   <Tab
-                     label={user === "vendedor" ? "PRODUCTOS" : "PEDIDOS"}
+                     label={user.tipoId === 2 ? "PRODUCTOS" : "PEDIDOS"}
                      {...tabProps(2)}
                   />
                </Tabs>
@@ -162,9 +181,8 @@ const PerfilUsuario = () => {
                            xs={4}
                            sm={3}
                            md={2}>
-                           <Grid item>Nombre:</Grid>
-                           <Grid item>Apellido:</Grid>
-                           <Grid item>Telefono: </Grid>
+                           <Grid item>Nombre: </Grid>
+                           <Grid item>Apellido: </Grid>
                            <Grid item>Email: </Grid>
                         </Grid>
                         <Grid
@@ -175,9 +193,9 @@ const PerfilUsuario = () => {
                            xs={8}
                            sm={9}
                            md={10}>
-                           <Grid item>{datosUsuario.nombre}</Grid>
-                           <Grid item>{datosUsuario.apellido}</Grid>
-                           <Grid item>{datosUsuario.email}</Grid>
+                           <Grid item>{user.usuarioNombre}</Grid>
+                           <Grid item>{user.usuarioApellido}</Grid>
+                           <Grid item>{user.usuarioCorreo}</Grid>
                         </Grid>
                      </Grid>
                      <Grid item xs={12}>

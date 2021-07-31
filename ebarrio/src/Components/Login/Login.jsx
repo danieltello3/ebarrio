@@ -16,6 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AuthContext } from "../../Auth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useHistory } from "react-router-dom";
 
 const MySwal = withReactContent(Swal);
 
@@ -69,20 +70,20 @@ export default function SignInSide() {
    const classes = useStyles();
    const [loginForm, setLoginForm] = React.useState({});
    const { currentUser, setCurrentUser } = useContext(AuthContext);
-
+   const history = useHistory();
    const handleLogin = async () => {
       console.log(loginForm);
       try {
-         const respuesta = await axios.post(
-            "https://ebarrio.herokuapp.com/login",
-            loginForm
-         );
-         if (respuesta.status === 200) {
-            const token = respuesta.data.content;
-            setCurrentUser(true);
-            localStorage.setItem("token", token);
-         }
-         console.log(respuesta);
+         await axios
+            .post("https://ebarrio.herokuapp.com/login", loginForm)
+            .then((respuesta) => {
+               if (respuesta.status === 200) {
+                  const token = respuesta.data.content;
+                  setCurrentUser(true);
+                  localStorage.setItem("token", token);
+               }
+            })
+            .then(() => history.push("/perfil"));
       } catch (error) {
          MySwal.fire({
             icon: "error",
