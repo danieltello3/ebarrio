@@ -10,64 +10,64 @@ import OnlineShopping from "./Components/Home/OnlineShopping";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import "./App.css";
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { indigo } from "@material-ui/core/colors";
 import { grey } from "@material-ui/core/colors";
 import PerfilUsuario from "./Components/PerfilUsuario/PerfilUsuario";
 import AddProduct from "./Components/PerfilUsuario/AddProduct";
+import { AuthProvider } from "./Auth";
+import PrivateRoute from "./PrivateRoute";
 
 const theme = createTheme({
    palette: {
       primary: {
-        main: '#3949ab',
+         main: "#3949ab",
       },
-      secondary:{
+      secondary: {
          main: grey[900],
-       },
-    },
- });
+      },
+   },
+});
 
 const App = () => {
    return (
       <div>
          <ThemeProvider theme={theme}>
-         <Router>
-            <NavBar />
-            <Switch>
-               <Route exac path="/Login">
-                  <Login />
-               </Route>
-               <Route exac path="/Register">
-                  <Register />
-               </Route>
-               <Route exact path="/">
-                  <OnlineShopping />
-                  <ProductoLista />
-               </Route>
-               <Route path="/Detail/:id">
-                  <Detail />
-               </Route>
-               <Route exact path="/CartShop">
-                  <CartShop />
-               </Route>
-               <Route exact path="/producto">
-                  <ProductoLista />
-               </Route>
-               <Route exact path="/perfil">
-                  <PerfilUsuario />
-               </Route>
-               <Route exact path="/agregarProducto">
-                  <AddProduct />
-               </Route>
-               <Route exact path="/servicio">
-                  <ServicioLista />
-               </Route>
-               <Route path="/Detail/:id">
-                  <Detail />
-               </Route>
-            </Switch>
-            <Footer />
-         </Router>
+            <AuthProvider>
+               <Router>
+                  <NavBar />
+                  <Switch>
+                     <Route exac path="/Login">
+                        <Login />
+                     </Route>
+                     <Route exac path="/Register">
+                        <Register />
+                     </Route>
+                     <Route exact path="/">
+                        <OnlineShopping />
+                        <ProductoLista />
+                     </Route>
+                     <Route path="/Detail/:id">
+                        <Detail />
+                     </Route>
+                     <Route exact path="/CartShop">
+                        <CartShop />
+                     </Route>
+                     <Route exact path="/producto">
+                        <ProductoLista />
+                     </Route>
+                     <PrivateRoute path="/perfil" comp={PerfilUsuario} />
+                     <PrivateRoute path="/agregarProducto" comp={AddProduct} />
+                     <Route exact path="/servicio">
+                        <ServicioLista />
+                     </Route>
+                     <Route path="/Detail/:id">
+                        <Detail />
+                     </Route>
+                  </Switch>
+                  <Footer />
+               </Router>
+            </AuthProvider>
          </ThemeProvider>
       </div>
    );

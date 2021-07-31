@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,6 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
+import { AuthContext } from "../../../Auth";
 
 const useStyles = makeStyles((theme) => ({
    menuButton: {
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = () => {
    const classes = useStyles();
    const history = useHistory();
-   const [auth, setAuth] = React.useState(true);
+   const { currentUser } = useContext(AuthContext);
    const [anchorEl, setAnchorEl] = React.useState(null);
 
    const handleClickMenu = (event) => {
@@ -142,43 +143,48 @@ const NavBar = () => {
                         </Box>
                      </Box>
 
-                     <Box p={2} order={2}>
-                        <Button
-                           color="secondary"
-                           onClick={() => history.push("/Login")}>
-                           Ingresar
-                        </Button>
-                     </Box>
+                     {!!currentUser ? (
+                        <>
+                           <Box p={1} order={4}>
+                              <IconButton
+                                 aria-label="show 4 new shops"
+                                 color="secondary"
+                                 onClick={() => history.push("/CartShop")}>
+                                 <Badge badgeContent={1} color="secondary">
+                                    <ShoppingCartOutlinedIcon />
+                                 </Badge>
+                              </IconButton>
+                           </Box>
+                           <Box p={1} order={5}>
+                              <IconButton
+                                 aria-label="account of current user"
+                                 aria-controls="menu-appbar"
+                                 aria-haspopup="true"
+                                 onClick={() => history.push("/perfil")}
+                                 color="secondary">
+                                 <AccountCircle />
+                              </IconButton>
+                           </Box>
+                        </>
+                     ) : (
+                        <>
+                           <Box p={2} order={2}>
+                              <Button
+                                 color="secondary"
+                                 onClick={() => history.push("/Login")}>
+                                 Ingresar
+                              </Button>
+                           </Box>
 
-                     <Box p={2} order={3}>
-                        <Button
-                           color="secondary"
-                           onClick={() => history.push("/Register")}>
-                           Registrarme
-                        </Button>
-                     </Box>
-
-                     <Box p={1} order={4}>
-                        <IconButton
-                           aria-label="show 4 new shops"
-                           color="secondary"
-                           onClick={() => history.push("/CartShop")}>
-                           <Badge badgeContent={1} color="secondary">
-                              <ShoppingCartOutlinedIcon />
-                           </Badge>
-                        </IconButton>
-                     </Box>
-
-                     <Box p={1} order={5}>
-                        <IconButton
-                           aria-label="account of current user"
-                           aria-controls="menu-appbar"
-                           aria-haspopup="true"
-                           onClick={() => history.push("/perfil")}
-                           color="secondary">
-                           <AccountCircle />
-                        </IconButton>
-                     </Box>
+                           <Box p={2} order={3}>
+                              <Button
+                                 color="secondary"
+                                 onClick={() => history.push("/Register")}>
+                                 Registrarme
+                              </Button>
+                           </Box>
+                        </>
+                     )}
                   </Box>
                </div>
             </Toolbar>
