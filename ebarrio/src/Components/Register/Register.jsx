@@ -18,7 +18,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://youtu.be/Z9cVv-02QFE">
         Ebarrio
       </Link>{' '}
       {new Date().getFullYear()}
@@ -29,7 +29,11 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
    root: {
-      height: '100vh',
+      //backgroundImage:'url(http://www.equipoplastico.com/wp-content/uploads/2009/11/ep-lima-chicha23.jpg)',
+      background:'Grey',
+      borderRadius:'5%',
+      border:'5px',
+      borderColor:'grey',
     },
   paper: {
     marginTop: theme.spacing(8),
@@ -51,10 +55,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-  const classes = useStyles();
-
+  const classes = useStyles();  
   return (
-    <Container component="main" maxWidth="xs" >
+     <div >
+
+     
+    <Container component="main" maxWidth="xs"  >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -73,7 +79,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Nombres"
                 autoFocus
               />
             </Grid>
@@ -83,7 +89,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Apellidos"
                 name="lastName"
                 autoComplete="lname"
               />
@@ -94,7 +100,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo"
                 name="email"
                 autoComplete="email"
               />
@@ -105,7 +111,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contrasena"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -114,7 +120,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="Soy vendedor"
               />
             </Grid>
           </Grid>
@@ -125,11 +131,11 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Registarme
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/Login" variant="body2">
                 Ya tienes cuenta? Inicia Session
               </Link>
             </Grid>
@@ -140,5 +146,7 @@ export default function SignUp() {
         <Copyright />
       </Box>
     </Container>
+    </div>
   );
+  
 }

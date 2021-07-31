@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
       width: "100%",
       [theme.breakpoints.up("md")]: {
-         //marginLeft: theme.spacing(3),
          width: 500,
       },
    },
@@ -66,16 +65,18 @@ const useStyles = makeStyles((theme) => ({
    },
    root: {
                               //145 o 325
-      //background: 'linear-gradient(325deg, #61F908 15%, #FFFF00 40%, #FFAA00 55%, #FF007A 85% )',
+      background: 'linear-gradient(325deg, #61F908 15%, #FFFF00 40%, #FFAA00 55%, #FF007A 85% )',
       //backgroundImage:'url(https://upload.wikimedia.org/wikipedia/commons/6/62/Carteles_chicha.jpg)',
       backgroundSize: '100%',
       borderColor:'#96acb0' ,
       
     },
-    
-
-
+   colorN: {
+      color:'Black',
+   }
 }));
+
+
 const NavBar = () => {
    const classes = useStyles();
    const history = useHistory();
@@ -145,19 +146,20 @@ const NavBar = () => {
       <div>
          <AppBar position="static" className={classes.root}>
             <Toolbar >
-               <Typography variant="h6" onClick={() => history.push("/")}>
+               <Typography className={classes.colorN} variant="h6" onClick={() => history.push("/")}>
                   Ebarrio
                </Typography>
-               <div style={{ width: "100%" }}>
+               <div  style={{ width: "100%" }}>
                   <Box display="flex">
                      <Box p={1} flexGrow={1} order={1} ml>
                         <Box display="flex" flexDirection="row">
                            <Box>
                               <Button
+                              className={classes.colorN}
                                  aria-controls="simple-menu"
                                  aria-haspopup="true"
                                  onClick={handleClick}
-                                 color="initial">
+                                 color="black">
                                        Menu
                               </Button>
 
@@ -199,7 +201,7 @@ const NavBar = () => {
                      </Box>
 
                      <Box p={1} order={2}>
-                        <Button color="inherit"
+                        <Button color="secondary"
                          onClick={() => history.push("/Login")}>
                            Ingresar
                         </Button>

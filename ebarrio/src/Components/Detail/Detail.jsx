@@ -57,19 +57,18 @@ export default function Detail() {
          <Card className={classes.root}>
             <CardMedia
                className={classes.content}
-               image={Productos.url}
+               image='https://inesdecominges.files.wordpress.com/2015/02/selfie-canguro-buena.jpg?w=640&h=510&crop=1'
                title="imagen"
             />
-
             <CardContent className={classes.details}>
                <Typography component="h4" variant="h4">
-                  {Productos.titulo}
+                  Medias
                </Typography>
                <Typography variant="subtitle1" color="textSecondary">
-                  {Productos.descripcion}
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id itaque vitae minima ratione hic, tempora dolor magni dolores impedit dignissimos quod doloribus sit expedita ullam cumque qui deleniti iure alias.
                </Typography>
                <Typography variant="subtitle1" color="textPrimary">
-                  {Productos.costo}
+                  S./92.30
                </Typography>
             </CardContent>
             <CardActions>
