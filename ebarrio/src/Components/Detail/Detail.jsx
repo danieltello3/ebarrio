@@ -9,7 +9,8 @@ import Button from "@material-ui/core/Button";
 import { Grid } from "@material-ui/core";
 import useFetch from "../../hooks/useFetch/useFetch";
 import Producto from "../Producto/Producto";
-//import Producto from "./Producto";
+import ProductoLista from "../Producto/ProductoLista";
+
 import { useParams, useHistory } from "react-router-dom";
 
 const url = "http://localhost:8000/ProductoLista";
@@ -20,17 +21,25 @@ const useStyles = makeStyles((theme) => ({
       width: "60%",
       paddingTop: theme.spacing(3),
       margin: "auto",
+      marginTop:50,
+      borderRadius:10,
+      backgroundColor:'#e0e0e0',
+      opacity:'95%'
+      
    },
    details: {
       display: "flex",
       flexDirection: "column",
       width: 650,
       height: 350,
+
    },
    content: {
       flex: "1 0 auto",
-      width: 500,
+      width: 400,
       height: 350,
+      borderRadius: 10,
+
    },
    cover: {},
    controls: {
@@ -44,6 +53,15 @@ const useStyles = makeStyles((theme) => ({
       height: 104,
       width: 100,
    },
+   fondo:{
+      backgroundImage:"url(http://www.equipoplastico.com/wp-content/uploads/2009/11/ep-lima-chicha23.jpg)"
+   },
+   button:{
+      position:'button',
+   },
+   espace:{
+       margin:'50 auto 50 auto',
+   },
 }));
 
 export default function Detail() {
@@ -53,7 +71,7 @@ export default function Detail() {
    const history = useHistory();
 
    return (
-      <Grid>
+      <Grid >
          <Card className={classes.root}>
             <CardMedia
                className={classes.content}
@@ -61,22 +79,35 @@ export default function Detail() {
                title="imagen"
             />
             <CardContent className={classes.details}>
-               <Typography component="h4" variant="h4">
-                  Medias
-               </Typography>
-               <Typography variant="subtitle1" color="textSecondary">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id itaque vitae minima ratione hic, tempora dolor magni dolores impedit dignissimos quod doloribus sit expedita ullam cumque qui deleniti iure alias.
-               </Typography>
-               <Typography variant="subtitle1" color="textPrimary">
-                  S./92.30
-               </Typography>
+               <div>
+                  <Typography component="h4" variant="h4">
+                     Medias
+                  </Typography>
+               </div>
+               <div className={classes.espace}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id itaque vitae minima ratione hic, tempora dolor magni dolores impedit dignissimos quod doloribus sit expedita ullam cumque qui deleniti iure alias.
+                  </Typography>
+               </div>
+               <div className={classes.espace}>
+                  <Typography variant="subtitle1" color="textPrimary">
+                     S./92.30
+                  </Typography>
+               </div>
+               
+
             </CardContent>
-            <CardActions>
-               <Button variant="contained" disableElevation color="primary">
-                  Pagar
+            <CardActions className={classes.button}>
+               <Button variant="outlined" size="large" disableElevation color="primary">
+                  Añadir
                </Button>
             </CardActions>
          </Card>
-      </Grid>
+      
+      <div>
+         <ProductoLista />
+      </div>
+      </Grid> 
+
    );
 }

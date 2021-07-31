@@ -38,11 +38,8 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
    root: {
-      //backgroundImage:'url(http://www.equipoplastico.com/wp-content/uploads/2009/11/ep-lima-chicha23.jpg)',
-      background: "Grey",
-      borderRadius: "5%",
+      //background:'url(http://www.equipoplastico.com/wp-content/uploads/2009/11/ep-lima-chicha23.jpg)',
       border: "5px",
-      borderColor: "grey",
    },
    paper: {
       marginTop: theme.spacing(8),
@@ -92,7 +89,7 @@ export default function SignUp() {
 
    const classes = useStyles();
    return (
-      <div>
+      <div className={classes.root}>
          <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
@@ -100,7 +97,7 @@ export default function SignUp() {
                   <LockOutlinedIcon />
                </Avatar>
                <Typography component="h1" variant="h5">
-                  Sign up
+                  Registrarse
                </Typography>
                <form className={classes.form} noValidate>
                   <Grid container spacing={2}>

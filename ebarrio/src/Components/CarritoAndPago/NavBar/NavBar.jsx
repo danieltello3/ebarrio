@@ -183,6 +183,7 @@ const NavBar = () => {
                         <>
                            <Box p={2} order={2}>
                               <Button
+                                 variant="outlined"
                                  color="secondary"
                                  onClick={() => history.push("/Login")}>
                                  Ingresar
@@ -191,9 +192,10 @@ const NavBar = () => {
 
                            <Box p={2} order={3}>
                               <Button
+                                 variant="outlined"
                                  color="secondary"
                                  onClick={() => history.push("/Register")}>
-                                 Registrarme
+                                 Registrarse
                               </Button>
                            </Box>
                         </>
