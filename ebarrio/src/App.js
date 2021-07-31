@@ -10,15 +10,28 @@ import OnlineShopping from "./Components/Home/OnlineShopping";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import "./App.css"
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { indigo } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 //import PerfilUsuario from "./components/PerfilUsuario/PerfilUsuario";
+
+const theme = createTheme({
+   palette: {
+      primary: {
+        main: '#3949ab',
+      },
+      secondary:{
+         main: grey[900],
+       },
+    },
+ });
 
 const App = () => {
    return (
       <div>
-         
+         <ThemeProvider theme={theme}>
          <Router>
             <NavBar />
-            
             <Switch>
                <Route exac path="/Login" >
                   <Login/>
@@ -51,6 +64,7 @@ const App = () => {
             </Switch>
             <Footer />
          </Router>
+         </ThemeProvider>
       </div>
    );
 };

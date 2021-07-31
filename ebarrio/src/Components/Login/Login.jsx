@@ -111,12 +111,12 @@ export default function SignInSide() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Olvidaste tu contrasena?
+                  
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Ya tienes una cuenta? Iniciar"}
+                <Link href="/Register" variant="body2">
+                  {"No tienes una cuenta? Registrarse"}
                 </Link>
               </Grid>
             </Grid>
