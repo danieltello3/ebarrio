@@ -1,5 +1,5 @@
 import React from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -8,9 +8,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Box from "@material-ui/core/Box";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import { Modal } from "@material-ui/core";
-import Login from "../../Login/Login";
-import Register from "../../Register/Register";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import IconButton from "@material-ui/core/IconButton";
@@ -22,17 +19,12 @@ const useStyles = makeStyles((theme) => ({
    menuButton: {
       marginRight: theme.spacing(2),
    },
-   modal: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-   },
    search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.2),
+      backgroundColor: "rgba(255,255,255,0.2)",
       "&:hover": {
-         backgroundColor: fade(theme.palette.common.white, 0.25),
+         backgroundColor: "rgba(255,255,255,0.4)",
       },
       marginLeft: 0,
       width: "100%",
@@ -48,9 +40,10 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      color: "#000",
    },
    inputRoot: {
-      color: "inherit",
+      color: "#000",
    },
    inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
@@ -80,64 +73,13 @@ const NavBar = () => {
    const history = useHistory();
    const [auth, setAuth] = React.useState(true);
    const [anchorEl, setAnchorEl] = React.useState(null);
-   const [openLogin, setOpenLogin] = React.useState(false);
-   const [openRegister, setOpenRegister] = React.useState(false);
-   const [anchorElUser, setAnchorElUser] = React.useState(null);
-   const [open, setOpen] = React.useState(false);
-   const anchorRef = React.useRef(null);
-   const openUser = Boolean(anchorElUser);
 
-   const handleChange = (event) => {
-      setAuth(event.target.checked);
-   };
-
-   const handleToggle = () => {
-      setOpen((prevOpen) => !prevOpen);
-   };
-
-   function handleListKeyDown(event) {
-      if (event.key === "Tab") {
-         event.preventDefault();
-         setOpen(false);
-      }
-   }
-
-   const prevOpen = React.useRef(open);
-   React.useEffect(() => {
-      if (prevOpen.current === true && open === false) {
-         anchorRef.current.focus();
-      }
-
-      prevOpen.current = open;
-   }, [open]);
-
-   const handleClick = (event) => {
+   const handleClickMenu = (event) => {
       setAnchorEl(event.currentTarget);
    };
 
-   const handleClose = () => {
+   const handleCloseMenu = () => {
       setAnchorEl(null);
-   };
-
-   const handleOpenModalLogin = () => {
-      setOpenLogin(true);
-   };
-
-   const handleCloseModalLogin = () => {
-      setOpenLogin(false);
-   };
-   const handleOpenModalRegister = () => {
-      setOpenRegister(true);
-   };
-
-   const handleCloseModalRegister = () => {
-      setOpenRegister(false);
-   };
-   const handleMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-   };
-   const handleCloseUser = () => {
-      setAnchorElUser(null);
    };
 
    return (
@@ -146,30 +88,32 @@ const NavBar = () => {
             <Toolbar>
                <Typography
                   className={classes.colorN}
-                  variant="h6"
+                  variant="h5"
                   onClick={() => history.push("/")}>
                   Ebarrio
                </Typography>
                <div style={{ width: "100%" }}>
-                  <Box display="flex">
-                     <Box p={1} flexGrow={1} order={1} ml>
-                        <Box display="flex" flexDirection="row">
+                  <Box display="flex" flexDirection="row" alignContent="center">
+                     <Box p={2} flexGrow={1} order={1}>
+                        <Box
+                           display="flex"
+                           flexDirection="row"
+                           alignContent="center">
                            <Box>
                               <Button
                                  className={classes.colorN}
                                  aria-controls="simple-menu"
                                  aria-haspopup="true"
-                                 onClick={handleClick}
+                                 onClick={handleClickMenu}
                                  color="black">
                                  Menu
                               </Button>
-
                               <Menu
                                  id="simple-menu"
                                  anchorEl={anchorEl}
                                  keepMounted
                                  open={Boolean(anchorEl)}
-                                 onClose={handleClose}>
+                                 onClose={handleCloseMenu}>
                                  <MenuItem
                                     onClick={() => history.push("/producto")}>
                                     Productos
@@ -178,7 +122,7 @@ const NavBar = () => {
                                     onClick={() => history.push("/servicio")}>
                                     Servicios
                                  </MenuItem>
-                                 <MenuItem onClick={handleClose}>
+                                 <MenuItem onClick={handleCloseMenu}>
                                     Otros
                                  </MenuItem>
                               </Menu>
@@ -201,39 +145,26 @@ const NavBar = () => {
                         </Box>
                      </Box>
 
-                     <Box p={1} order={2}>
+                     <Box p={2} order={2}>
                         <Button
                            color="secondary"
                            onClick={() => history.push("/Login")}>
                            Ingresar
                         </Button>
-                        <Modal
-                           className={classes.modal}
-                           open={openLogin}
-                           onClose={handleCloseModalLogin}>
-                           <Login />
-                        </Modal>
                      </Box>
 
-                     <Box p={1} order={3}>
+                     <Box p={2} order={3}>
                         <Button
                            color="secondary"
                            onClick={() => history.push("/Register")}>
                            Registrarme
                         </Button>
-                        <Modal
-                        //className={classes.modal}
-                        //open={openRegister}
-                        //onClose={handleCloseModalRegister}
-                        >
-                           <Register />
-                        </Modal>
                      </Box>
 
                      <Box p={1} order={4}>
                         <IconButton
                            aria-label="show 4 new shops"
-                           color="inherit"
+                           color="secondary"
                            onClick={() => history.push("/CartShop")}>
                            <Badge badgeContent={1} color="secondary">
                               <ShoppingCartOutlinedIcon />
@@ -247,7 +178,7 @@ const NavBar = () => {
                            aria-controls="menu-appbar"
                            aria-haspopup="true"
                            onClick={() => history.push("/perfil")}
-                           color="inherit">
+                           color="secondary">
                            <AccountCircle />
                         </IconButton>
                      </Box>
