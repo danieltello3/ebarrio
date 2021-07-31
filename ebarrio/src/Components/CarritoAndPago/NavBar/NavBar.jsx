@@ -18,7 +18,6 @@ import { useHistory } from "react-router";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
 
-
 const useStyles = makeStyles((theme) => ({
    menuButton: {
       marginRight: theme.spacing(2),
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
    search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.20),
+      backgroundColor: fade(theme.palette.common.white, 0.2),
       "&:hover": {
          backgroundColor: fade(theme.palette.common.white, 0.25),
       },
@@ -64,18 +63,17 @@ const useStyles = makeStyles((theme) => ({
       },
    },
    root: {
-                              //145 o 325
-      background: 'linear-gradient(325deg, #61F908 15%, #FFFF00 40%, #FFAA00 55%, #FF007A 85% )',
+      //145 o 325
+      background:
+         "linear-gradient(325deg, #61F908 15%, #FFFF00 40%, #FFAA00 55%, #FF007A 85% )",
       //backgroundImage:'url(https://upload.wikimedia.org/wikipedia/commons/6/62/Carteles_chicha.jpg)',
-      backgroundSize: '100%',
-      borderColor:'#96acb0' ,
-      
-    },
+      backgroundSize: "100%",
+      borderColor: "#96acb0",
+   },
    colorN: {
-      color:'Black',
-   }
+      color: "Black",
+   },
 }));
-
 
 const NavBar = () => {
    const classes = useStyles();
@@ -145,22 +143,25 @@ const NavBar = () => {
    return (
       <div>
          <AppBar position="static" className={classes.root}>
-            <Toolbar >
-               <Typography className={classes.colorN} variant="h6" onClick={() => history.push("/")}>
+            <Toolbar>
+               <Typography
+                  className={classes.colorN}
+                  variant="h6"
+                  onClick={() => history.push("/")}>
                   Ebarrio
                </Typography>
-               <div  style={{ width: "100%" }}>
+               <div style={{ width: "100%" }}>
                   <Box display="flex">
                      <Box p={1} flexGrow={1} order={1} ml>
                         <Box display="flex" flexDirection="row">
                            <Box>
                               <Button
-                              className={classes.colorN}
+                                 className={classes.colorN}
                                  aria-controls="simple-menu"
                                  aria-haspopup="true"
                                  onClick={handleClick}
                                  color="black">
-                                       Menu
+                                 Menu
                               </Button>
 
                               <Menu
@@ -201,8 +202,9 @@ const NavBar = () => {
                      </Box>
 
                      <Box p={1} order={2}>
-                        <Button color="secondary"
-                         onClick={() => history.push("/Login")}>
+                        <Button
+                           color="secondary"
+                           onClick={() => history.push("/Login")}>
                            Ingresar
                         </Button>
                         <Modal
@@ -220,10 +222,10 @@ const NavBar = () => {
                            Registrarme
                         </Button>
                         <Modal
-                           //className={classes.modal}
-                           //open={openRegister}
-                           //onClose={handleCloseModalRegister}
-                           >
+                        //className={classes.modal}
+                        //open={openRegister}
+                        //onClose={handleCloseModalRegister}
+                        >
                            <Register />
                         </Modal>
                      </Box>
@@ -244,36 +246,16 @@ const NavBar = () => {
                            aria-label="account of current user"
                            aria-controls="menu-appbar"
                            aria-haspopup="true"
-                           onClick={handleMenu}
+                           onClick={() => history.push("/perfil")}
                            color="inherit">
                            <AccountCircle />
                         </IconButton>
-                        <Menu
-                           id="menu-appbar"
-                           anchorEl={anchorElUser}
-                           anchorOrigin={{
-                              vertical: "top",
-                              horizontal: "right",
-                           }}
-                           keepMounted
-                           transformOrigin={{
-                              vertical: "top",
-                              horizontal: "right",
-                           }}
-                           open={openUser}
-                           onClose={handleCloseUser}>
-                           <MenuItem onClick={handleClose}>Profile</MenuItem>
-                           <MenuItem onClick={handleClose}>My account</MenuItem>
-                        </Menu>
                      </Box>
                   </Box>
                </div>
-               
             </Toolbar>
-            
          </AppBar>
       </div>
-      
    );
 };
 
