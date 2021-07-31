@@ -32,7 +32,7 @@ const OnlineShopping = () => {
                container
                spacing={1}
                direction="row"
-               justify="center"
+               justifyContent="center"
                alignItems="center"
                alignContent="center">
                <Grid item xs={6}>
@@ -62,7 +62,7 @@ const OnlineShopping = () => {
             container
             spacing={1}
             direction="row"
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             alignContent="center"
             className={classes.gridContainer}>
@@ -71,7 +71,7 @@ const OnlineShopping = () => {
                   container
                   spacing={1}
                   direction="row"
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   alignContent="center">
                   <Grid item xs={6}>

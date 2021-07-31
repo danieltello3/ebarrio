@@ -63,9 +63,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundSize: "100%",
       borderColor: "#96acb0",
    },
-   colorN: {
-      color: "Black",
-   },
 }));
 
 const NavBar = () => {
@@ -105,7 +102,7 @@ const NavBar = () => {
                                  aria-controls="simple-menu"
                                  aria-haspopup="true"
                                  onClick={handleClickMenu}
-                                 color="black">
+                                 color="secondary">
                                  Menu
                               </Button>
                               <Menu

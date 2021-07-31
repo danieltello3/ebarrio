@@ -93,7 +93,7 @@ function ServicioLista(id) {
 
    return (
       <Box p={5}>
-         <Grid container justify="center" spacing={4}>
+         <Grid container justifyContent="center" spacing={4}>
             {ServiciossLista.map(({ titulo, descripcion, costo, url, id }) => (
                <Grid key={id} items xs={12} sm={3}>
                   <Servicio

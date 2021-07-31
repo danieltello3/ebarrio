@@ -53,7 +53,8 @@ const ProductosLista = [
    },
    {
       titulo: "Plantas",
-      descripcion: "Plantitas Ornamnetales para casa y el bienestar de tu familia",
+      descripcion:
+         "Plantitas Ornamnetales para casa y el bienestar de tu familia",
       costo: " S/.15.00",
       url: "https://imgs-akamai.mnstatic.com/ff/df/ffdfd94dae95541a72b48f3282197e2b.jpg",
       id: 6,
@@ -67,7 +68,8 @@ const ProductosLista = [
    },
    {
       titulo: "Hamburguesa Royal (Mediana)",
-      descripcion: "Hamburguesa de 100gr, papas al hilo o papa nativas, huevo, queso, jamonada, lechuga y tomate",
+      descripcion:
+         "Hamburguesa de 100gr, papas al hilo o papa nativas, huevo, queso, jamonada, lechuga y tomate",
       costo: " S/.25.00",
       url: "https://d31npzejelj8v1.cloudfront.net/media/catalog/product/h/a/hamburguesa-bembos-royal-base_1.webp",
       id: 8,
@@ -120,7 +122,7 @@ function ProductoLista(id) {
 
    return (
       <Box p={5}>
-         <Grid container justify="center" spacing={4}>
+         <Grid container justifyContent="center" spacing={4}>
             {ProductosLista.map(({ titulo, descripcion, costo, url, id }) => (
                <Grid key={id} items xs={12} sm={3}>
                   <Producto
