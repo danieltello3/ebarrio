@@ -14,9 +14,12 @@ import {
    Divider,
    Paper,
    Fab,
+   Modal,
 } from "@material-ui/core";
 import ItemThumbnail from "./ItemThumbnail/ItemThumbnail";
 import AvatarPerfil from "./Avatar";
+import AddProduct from "./AddProduct";
+import { useHistory } from "react-router-dom";
 // import firebase, { db } from "./../../firebase";
 
 function TabPanel(props) {
@@ -88,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 const PerfilUsuario = () => {
    const classes = useStyles();
    const [value, setValue] = React.useState(0);
-
+   const history = useHistory();
    const theme = useTheme();
    const currentBP = useMediaQuery(theme.breakpoints.down("xs"));
    //    let user = firebase.auth().currentUser;
@@ -107,6 +110,8 @@ const PerfilUsuario = () => {
    //       }
    //       fetchData();
    //    }, [user]);
+
+   const body = <AddProduct />;
 
    return (
       <Container maxWidth="lg" className={classes.container}>
@@ -263,7 +268,8 @@ const PerfilUsuario = () => {
                         variant="extended"
                         color="secondary"
                         aria-label="agregar producto"
-                        className={classes.fab}>
+                        className={classes.fab}
+                        onClick={() => history.push("/agregarProducto")}>
                         <AddIcon className={classes.extendedIcon} />
                         Agregar Producto
                      </Fab>

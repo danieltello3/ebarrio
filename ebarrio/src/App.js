@@ -11,6 +11,7 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import "./App.css";
 import PerfilUsuario from "./Components/PerfilUsuario/PerfilUsuario";
+import AddProduct from "./Components/PerfilUsuario/AddProduct";
 
 const App = () => {
    return (
@@ -40,6 +41,9 @@ const App = () => {
                </Route>
                <Route exact path="/perfil">
                   <PerfilUsuario />
+               </Route>
+               <Route exact path="/agregarProducto">
+                  <AddProduct />
                </Route>
                <Route exact path="/servicio">
                   <ServicioLista />
