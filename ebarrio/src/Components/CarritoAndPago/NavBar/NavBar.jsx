@@ -11,6 +11,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import IconButton from "@material-ui/core/IconButton";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@material-ui/core/Menu";
@@ -69,8 +70,13 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = () => {
    const classes = useStyles();
    const history = useHistory();
-   const { currentUser } = useContext(AuthContext);
+   const { currentUser, setCurrentUser } = useContext(AuthContext);
    const [anchorEl, setAnchorEl] = React.useState(null);
+
+   const logOut = () => {
+      setCurrentUser(false);
+      history.push("/");
+   };
 
    const handleClickMenu = (event) => {
       setAnchorEl(event.currentTarget);
@@ -163,6 +169,12 @@ const NavBar = () => {
                                  onClick={() => history.push("/perfil")}
                                  color="secondary">
                                  <AccountCircle />
+                              </IconButton>
+                              <IconButton
+                                 aria-label="Cerrar sesion"
+                                 onClick={logOut}
+                                 color="secondary">
+                                 <ExitToAppIcon />
                               </IconButton>
                            </Box>
                         </>

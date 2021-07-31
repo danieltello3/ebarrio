@@ -181,6 +181,7 @@ export default function SignUp() {
                                  value="vendedor"
                                  color="primary"
                                  onChange={(e) => {
+                                    console.log(e.target.checked);
                                     if (e.target.checked === true) {
                                        setRegisterForm({
                                           ...registerForm,
