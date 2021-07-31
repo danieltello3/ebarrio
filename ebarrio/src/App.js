@@ -9,11 +9,12 @@ import NavBar from "./Components/CarritoAndPago/NavBar/NavBar";
 import OnlineShopping from "./Components/Home/OnlineShopping";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-import "./App.css"
+import "./App.css";
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { indigo } from "@material-ui/core/colors";
 import { grey } from "@material-ui/core/colors";
-//import PerfilUsuario from "./components/PerfilUsuario/PerfilUsuario";
+import PerfilUsuario from "./Components/PerfilUsuario/PerfilUsuario";
+import AddProduct from "./Components/PerfilUsuario/AddProduct";
 
 const theme = createTheme({
    palette: {
@@ -33,11 +34,11 @@ const App = () => {
          <Router>
             <NavBar />
             <Switch>
-               <Route exac path="/Login" >
-                  <Login/>
+               <Route exac path="/Login">
+                  <Login />
                </Route>
-               <Route exac path="/Register" >
-                  <Register/>
+               <Route exac path="/Register">
+                  <Register />
                </Route>
                <Route exact path="/">
                   <OnlineShopping />
@@ -52,9 +53,12 @@ const App = () => {
                <Route exact path="/producto">
                   <ProductoLista />
                </Route>
-               {/* <Route exact path="/PerfilUsuario">
+               <Route exact path="/perfil">
                   <PerfilUsuario />
-               </Route> */}
+               </Route>
+               <Route exact path="/agregarProducto">
+                  <AddProduct />
+               </Route>
                <Route exact path="/servicio">
                   <ServicioLista />
                </Route>
