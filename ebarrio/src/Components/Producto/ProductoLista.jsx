@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -14,6 +14,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import { Zoom } from "@material-ui/core";
+import axios from "axios";
 
 const ProductosLista = [
    {
@@ -112,28 +113,52 @@ const clase = makeStyles((theme) => ({
 
 function ProductoLista(id) {
    const history = useHistory();
+   const [listaProductos, setListaProductos] = React.useState(null);
    const redirigir = (id) => {
       return history.push(`/Detail/${id}`);
    };
 
+   const imgurl =
+      "https://imgs-akamai.mnstatic.com/ff/df/ffdfd94dae95541a72b48f3282197e2b.jpg";
+   const url = "https://ebarrio.herokuapp.com/productos";
    // call  dbproductos
    //const {data:Producto,isLoading,error} = useFetch(
    //  "http://localhost:8000/Producto");
 
+   useEffect(() => {
+      async function fetchData() {
+         await axios.get(url).then((respuesta) => {
+            const data = respuesta.data.content.productos;
+            console.log(data);
+            setListaProductos(data);
+         });
+      }
+      fetchData();
+   }, []);
+
    return (
       <Box p={5}>
          <Grid container justifyContent="center" spacing={4}>
-            {ProductosLista.map(({ titulo, descripcion, costo, url, id }) => (
-               <Grid key={id} items xs={12} sm={3}>
-                  <Producto
-                     url={url}
-                     titulo={titulo}
-                     costo={costo}
-                     descripcion={descripcion}
-                     redirigir={() => redirigir(id)}
-                  />
-               </Grid>
-            ))}
+            {listaProductos &&
+               listaProductos.map(
+                  ({
+                     productoNombre,
+                     productoDescripcion,
+                     productoPrecio,
+                     url,
+                     productoId,
+                  }) => (
+                     <Grid key={id} items xs={12} sm={3}>
+                        <Producto
+                           url={url ? url : imgurl}
+                           titulo={productoNombre}
+                           costo={productoPrecio}
+                           descripcion={productoDescripcion}
+                           redirigir={() => redirigir(id)}
+                        />
+                     </Grid>
+                  )
+               )}
          </Grid>
       </Box>
    );

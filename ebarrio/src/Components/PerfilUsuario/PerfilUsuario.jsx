@@ -22,6 +22,8 @@ import AddProduct from "./AddProduct";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Auth";
+import { IconButton } from "@material-ui/core";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
 // import firebase, { db } from "./../../firebase";
 
 function TabPanel(props) {
@@ -88,6 +90,9 @@ const useStyles = makeStyles((theme) => ({
       bottom: theme.spacing(2),
       right: theme.spacing(2),
    },
+   input: {
+      display: "none",
+   },
 }));
 
 const PerfilUsuario = () => {
@@ -95,6 +100,7 @@ const PerfilUsuario = () => {
    const [value, setValue] = React.useState(0);
    const { currentUser, setCurrentUser } = useContext(AuthContext);
    const history = useHistory();
+   const [fileUpload, setFileUpload] = React.useState(null);
    const theme = useTheme();
    const currentBP = useMediaQuery(theme.breakpoints.down("xs"));
    //    let user = firebase.auth().currentUser;
@@ -103,6 +109,31 @@ const PerfilUsuario = () => {
 
    const handleChange = (event, newValue) => {
       setValue(newValue);
+   };
+
+   const handleUploadPicture = (e) => {
+      const data = e.target.files[0];
+      setFileUpload(data);
+   };
+
+   const handleSubmitPhoto = async () => {
+      await axios
+         .post(
+            "https://ebarrio.herokuapp.com/subirImagenPerfil?carpeta=usuarios",
+            fileUpload,
+            {
+               headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  "Content-Type": "multipart/form-data",
+               },
+            }
+         )
+         .then((respuesta) => {
+            console.log(respuesta);
+         })
+         .catch((error) => {
+            console.log(error);
+         });
    };
 
    useEffect(() => {
@@ -141,7 +172,23 @@ const PerfilUsuario = () => {
                justifyContent="center"
                alignItems="center"
                className={classes.header}>
-               <AvatarPerfil />
+               <input
+                  accept="image/*"
+                  className={classes.input}
+                  id="icon-button-file"
+                  type="file"
+                  onChange={(e) => handleUploadPicture(e)}
+               />
+               <label htmlFor="icon-button-file">
+                  <IconButton
+                     color="primary"
+                     aria-label="upload picture"
+                     component="span">
+                     <PhotoCamera />
+                  </IconButton>
+               </label>
+
+               <AvatarPerfil url={user.url} />
                <Typography variant="h2" color="primary">
                   {`Bienvenido ${user.usuarioNombre}`}
                </Typography>
@@ -269,7 +316,7 @@ const PerfilUsuario = () => {
                      </Grid>
                   </Grid>
                </TabPanel>
-               {user === "vendedor" ? (
+               {user.tipoId === 2 ? (
                   <TabPanel value={value} index={2}>
                      <Grid container spacing={3}>
                         <Grid item>
