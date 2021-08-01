@@ -148,8 +148,9 @@ function ProductoLista(id) {
                      url,
                      productoId,
                   }) => (
-                     <Grid key={id} items xs={12} sm={3}>
+                     <Grid key={productoId} items xs={12} sm={3}>
                         <Producto
+                           id={productoId}
                            url={url ? url : imgurl}
                            titulo={productoNombre}
                            costo={productoPrecio}
